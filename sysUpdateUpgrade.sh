@@ -1,33 +1,33 @@
-#! /usr/bin/env bash
+#! /usr/bin/env sh
 
 # Program for automatic updating of the system.
 
 # Checking if there is an internet connection.
 if ! wget -q --spider https://www.google.com; then
-    echo 'There is no internet connection.[Exit]'
+    printf '%b' 'There is no internet connection.[Exit]\n'
     exit 1;
 fi
 
 # Packages list update
 if sudo apt update; then
-    echo 'Updated package list.[OK]'
+    printf '%b' 'Updated package list.[OK]\n'
 else
-    echo 'Failed, the package list has not been updated.[Exit]'
+    printf '%b' 'Failed, the package list has not been updated.[Exit]\n'
     exit 1
 fi
 
 # Packages upgrade
 if sudo apt -y upgrade; then
-    echo 'Packages upgraded successfully.[OK]'
+    printf '%b' 'Packages upgraded successfully.[OK]\n'
 else
-    echo 'Failed, the packages have not been upgraded.[Exit]'
+    printf '%b' 'Failed, the packages have not been upgraded.[Exit]\n'
     exit 1
 fi
 
 # Cleaning /var/cache/apt/archives
 if sudo apt clean; then
-    echo 'Unnecessary files removed.[OK]'
+    printf '%b' 'Unnecessary files removed.[OK]\n'
 else
-    echo 'Failed to remove unnecessary files.[Exit]'
+    printf '%b' 'Failed to remove unnecessary files.[Exit]\n'
     exit 1
 fi
